@@ -8,7 +8,7 @@ st.set_page_config(
 )
 
 API_URL = "https://api.openai.com/v1/completions"
-headers = {"Authorization": st.secrets['OPENAI_API_KEY']}
+headers = {"Authorization": st.secrets['api_key']}
 
 st.header("Streamlit Chat - Demo")
 st.markdown("[Github](https://github.com/ai-yash/st-chat)")
