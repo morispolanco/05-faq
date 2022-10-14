@@ -7,8 +7,8 @@ st.set_page_config(
     page_icon=":robot:"
 )
 
-API_URL = "https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill"
-headers = {"Authorization": st.secrets['api_key']}
+API_URL = "https://api.openai.com/v1/completions"
+headers = {"Authorization": st.secrets['OPENAI_API_KEY']}
 
 st.header("Streamlit Chat - Demo")
 st.markdown("[Github](https://github.com/ai-yash/st-chat)")
