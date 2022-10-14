@@ -1,17 +1,37 @@
+from email.policy import default
+from multiprocessing.connection import answer_challenge
+import os
+import openai
 import streamlit as st
 from streamlit_chat import message
-import requests
+from Bot import mises, session_prompt
+from Sentiment import sentiment
+
+openai.api_key = os.getenv('OPENAI_API_KEY')
+
+
+start_sequence = "\nAI:"
+restart_sequence = "\n\Humano:"
 
 st.set_page_config(
-    page_title="Streamlit Chat - Demo",
-    page_icon=":robot:"
+    page_icon='🏢',
+    page_title='Chat Bot de Enología',
+    layout="centered",
+    initial_sidebar_state="auto",
+    menu_items={
+        'About': "This is a chatbot created using OPENAI's Advance GPT-3 model",
+        'Get Help': 'mailto:mpolanco@feylibertad.org',
+        'Report a bug': "mailto:mpolanco@feylibertadd.org",
+    }
 )
+st.title("Chat Bot de Enología")
 
-API_URL = "https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill"
-headers = {"Authorization": st.secrets['api_key']}
+st.sidebar.title("🏢 Chat Bot de Enología")
+st.sidebar.markdown("""
 
-st.header("Streamlit Chat - Demo")
-st.markdown("[Github](https://github.com/ai-yash/st-chat)")
+**Feedback/Questions**:
+[ARIN](https://arin.website)
+""")
 
 if 'generated' not in st.session_state:
     st.session_state['generated'] = []
@@ -19,52 +39,34 @@ if 'generated' not in st.session_state:
 if 'past' not in st.session_state:
     st.session_state['past'] = []
 
-def query(payload):
-	response = requests.post(API_URL, headers=headers, json=payload)
-	return response.json()
+if 'chat_log' not in st.session_state:
+    st.session_state['chat_log'] = session_prompt
 
-def get_text():
-    input_text = st.text_input("You: ","Hello, how are you?", key="input")
-    return input_text 
+chat_log = st.session_state['chat_log']
 
 
-user_input = get_text()
-
-if user_input:
-    output = query({
-        "inputs": {
-            "past_user_inputs": st.session_state.past,
-            "generated_responses": st.session_state.generated,
-            "text": user_input,
-        },"parameters": {"repetition_penalty": 1.33},
-    })
-
-    st.session_state.past.append(user_input)
-    st.session_state.generated.append(output["generated_text"])
-
-if st.session_state['generated']:
-
-    for i in range(len(st.session_state['generated'])-1, -1, -1):
-        message(st.session_state["generated"][i], key=str(i))
-        message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
+def append_interaction_to_chat_log(question, answer, chat_log=None):
+    if chat_log is None:
+        chat_log = session_prompt
+        return f'{chat_log}{restart_sequence} {question}{start_sequence}{answer}'
 
 
-user_input = get_text()
+question = st.text_input("Pregunta sobre vinos:",
+                         value='¿Qué es una variedad?')
+message(question, is_user=True)
 
-if user_input:
-    output = query({
-        "inputs": {
-            "past_user_inputs": st.session_state.past,
-            "generated_responses": st.session_state.generated,
-            "text": user_input,
-        },"parameters": {"repetition_penalty": 1.33},
-    })
+answer = mises(question, chat_log)
 
-    st.session_state.past.append(user_input)
-    st.session_state.generated.append(output["generated_text"])
+# printing the Answer
+chat_log = append_interaction_to_chat_log(question, answer, chat_log)
+message(answer)
 
-if st.session_state['generated']:
-
-    for i in range(len(st.session_state['generated'])-1, -1, -1):
-        message(st.session_state["generated"][i], key=str(i))
-        message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
+with st.expander("¿No está seguro de qué preguntar?"):
+    st.markdown("""
+Pruebe con alguna de estas preguntas:
+```
+1. ¿A qué temperatura se debe servir el vino tinto?
+2. ¿Qué es un tempranillo?
+3. ¿Vino tinto con carnes rojas y blanco con carnes blancas?
+```
+    """)
