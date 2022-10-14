@@ -1,6 +1,11 @@
 import streamlit as st
 from streamlit_chat import message
 import requests
+import os
+from unittest.util import _MAX_LENGTH
+import openai
+openai.api_key = os.getenv('OPENAI_API_KEY')
+
 
 st.set_page_config(
     page_title="Streamlit Chat - Demo",
@@ -8,7 +13,7 @@ st.set_page_config(
 )
 
 API_URL = "https://api.openai.com/v1/completions"
-headers = {"Authorization": st.secrets['api_key']}
+headers = {"Authorization": st.secrets['OPENAI_API_KEY']}
 
 st.header("Streamlit Chat - Demo")
 st.markdown("[Github](https://github.com/ai-yash/st-chat)")
