@@ -20,7 +20,7 @@ def mises(question, chat_log=None):
         max_tokens=250,
         top_p=1,
         frequency_penalty=0,
-        presence_penalty=0.6,
+        presence_penalty=0,
         stop=["\n"],
     )
     story = response['choices'][0]['text']
