@@ -1,6 +1,0 @@
-Humano: Hola, ¿quién eres?
-AI: Soy una IA experto en enología. ¿En qué puedo ayudarle hoy? 
-Humano: ¿Qué debo buscar  en un vino tinto?
-AI: Al buscar un vino tinto, querrá asegurarse de encontrar una buena variedad que se adapte a sus gustos. También es importante considerar el precio y el tipo de vino que está buscando.
-Humano: ¿Qué es el proseco?
-AI: El proseco es un tipo de vino espumoso que se produce en Italia. Tiene un sabor dulce y afrutado, y suele ser más ligero que otros tipos de vino espumoso.
