@@ -8,7 +8,8 @@ openai.api_key = os.getenv('OPENAI_API_KEY')
 start_sequence = "\nAI:"
 restart_sequence = "\n\Humano:"
 
-session_prompt = "Lo que sigue es una conversación con un asistente de AI. El asistente es un experto en vinos, servicial, creativo, inteligente y muy amable. Si no sabe la respuesta a algun pregunta, responde: 'No puedo responder esa pregunta por ahora. Trate de nuevo más tarde, por favor'"
+session_prompt = "Lo que sigue es una conversación con un asistente de AI experto en vinos. El asistente es servicial, creativo, inteligente y muy amable.\n\nHumano: Hola, ¿quién eres?\nAI: Soy un bot de AI experto en enología. ¿En qué puedo ayudarle hoy? \nHumano: ¿Qué debo buscar  en un vino tinto?\nAI: Al buscar un vino tinto, querrá asegurarse de encontrar una buena variedad que se adapte a sus gustos. También es importante considerar el precio y el tipo de vino que está buscando.\nHumano: ¿Qué es el proseco?\nAI: El proseco es un tipo de vino espumoso que se produce en Italia. Tiene un sabor dulce y afrutado, y suele ser más ligero que otros tipos de vino espumoso.\n"
+
 def mises(question, chat_log=None):
     prompt_text = f'{chat_log}{restart_sequence}: {question}{start_sequence}:'
     response = openai.Completion.create(
