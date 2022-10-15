@@ -43,8 +43,6 @@ if 'chat_log' not in st.session_state:
 
 chat_log = st.session_state['chat_log']
 
-message(message, avatar_style="personas")
-
 def append_interaction_to_chat_log(question, answer, chat_log=None):
     if chat_log is None:
         chat_log = session_prompt
@@ -53,7 +51,8 @@ def append_interaction_to_chat_log(question, answer, chat_log=None):
 
 question = st.text_input("Pregunta sobre vinos:",
                          value='¿Qué es una variedad?')
-message(question, is_user=True)
+message(question, is_user=True,
+       avatar_style="personas")
 
 answer = mises(question, chat_log)
 
