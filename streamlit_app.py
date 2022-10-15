@@ -29,7 +29,7 @@ st.sidebar.title("🏢 Chat Bot de Enología")
 st.sidebar.markdown("""
 
 **Feedback/Questions**:
-[ARIN](https://arin.website)
+[DIVIAPPS.COM](https://diviapps.com)
 """)
 
 if 'generated' not in st.session_state:
