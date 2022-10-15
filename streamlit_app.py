@@ -20,7 +20,7 @@ st.set_page_config(
     menu_items={
         'About': "This is a chatbot created using OPENAI's Advance GPT-3 model",
         'Get Help': 'mailto:mpolanco@feylibertad.org',
-        'Report a bug': "mailto:mpolanco@feylibertadd.org",
+        'Report a bug': "mailto:mpolanco@feylibertad.org",
     }
 )
 st.title("Chat Bot de Enología")
@@ -43,7 +43,7 @@ if 'chat_log' not in st.session_state:
 
 chat_log = st.session_state['chat_log']
 
-def message(message: avatar_style:personas)
+def message(message: avatar_style = personas)
 
 def append_interaction_to_chat_log(question, answer, chat_log=None):
     if chat_log is None:
