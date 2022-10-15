@@ -8,7 +8,7 @@ openai.api_key = os.getenv('OPENAI_API_KEY')
 start_sequence = "\nAI:"
 restart_sequence = "\n\Humano:"
 
-
+text_example = read_text_example()
 session_prompt = "Lo que sigue es una conversación con un asistente de AI. El asistente es un experto en vinos, servicial, creativo, inteligente y muy amable. Si no sabe la respuesta a algun pregunta, responde: 'No puedo responder esa pregunta por ahora. Trate de nuevo más tarde, por favor'"+text_example+data 
 def mises(question, chat_log=None):
     prompt_text = f'{chat_log}{restart_sequence}: {question}{start_sequence}:'
