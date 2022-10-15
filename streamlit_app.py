@@ -53,7 +53,7 @@ question = st.text_input("Pregunta sobre vinos:",
                          value='¿Qué es una variedad?')
 message(question, is_user=True,
        avatar_style="personas",
-       seed="personas)
+       seed="personas")
 
 answer = mises(question, chat_log)
 
