@@ -12,7 +12,7 @@ session_prompt = "Lo que sigue es una conversación con un asistente de AI exper
 
 def mises(question, chat_log=None):
     prompt_text = f'{chat_log}{restart_sequence}: {question}{start_sequence}:'
-    response = nlpcloud.Generation.create(
+    response = nlpcloud.generation.create(
         engine="finetuned-gpt-neox-20b",
         prompt=prompt_text,
         temperature=0.7,
