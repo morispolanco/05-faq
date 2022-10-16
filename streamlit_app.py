@@ -1,12 +1,12 @@
 from email.policy import default
 from multiprocessing.connection import answer_challenge
 import os
-import openai
+import nlpcloud
 import streamlit as st
 from streamlit_chat import message
 from Bot import mises, session_prompt
 
-openai.api_key = os.getenv('OPENAI_API_KEY')
+nlpcloud.api_key = os.getenv('TOKEN')
 
 
 start_sequence = "\nAI:"
