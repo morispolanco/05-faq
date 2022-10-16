@@ -2,7 +2,7 @@ import os
 from unittest.util import _MAX_LENGTH
 import nlpcloud
 import streamlit as st
-openai.api_key = os.getenv('OPENAI_API_KEY')
+nlpcloud.api_key = os.getenv('TOKEN')
 
 
 start_sequence = "\nAI:"
