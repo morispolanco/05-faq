@@ -1,6 +1,6 @@
 import os
 from unittest.util import _MAX_LENGTH
-import openai
+import nlpcloud
 import streamlit as st
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
@@ -12,8 +12,8 @@ session_prompt = "Lo que sigue es una conversación con un asistente de AI exper
 
 def mises(question, chat_log=None):
     prompt_text = f'{chat_log}{restart_sequence}: {question}{start_sequence}:'
-    response = openai.Completion.create(
-        engine="text-curie-001",
+    response = nlpcloud.Completion.create(
+        engine="finetuned-gpt-neox-20b",
         prompt=prompt_text,
         temperature=0.7,
         # max_length=250,
