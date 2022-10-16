@@ -8,11 +8,12 @@ nlpcloud.api_key = os.getenv('TOKEN')
 start_sequence = "\nAI:"
 restart_sequence = "\n\Humano:"
 
-session_prompt = "Lo que sigue es una conversación con un asistente de AI experto en vinos. El asistente es servicial, creativo, inteligente y muy amable.\n\nHumano: Hola, ¿quién eres?\nAI: Soy un bot de AI experto en enología. ¿En qué puedo ayudarle hoy? \nHumano: ¿Qué debo buscar  en un vino tinto?\nAI: Al buscar un vino tinto, querrá asegurarse de encontrar una buena variedad que se adapte a sus gustos. También es importante considerar el precio y el tipo de vino que está buscando.\nHumano: ¿Qué es el proseco?\nAI: El proseco es un tipo de vino espumoso que se produce en Italia. Tiene un sabor dulce y afrutado, y suele ser más ligero que otros tipos de vino espumoso.\n"
-
+def client = nlpcloud.Client("<model_name>", "<token>", gpu=True)
+    client.generation("Lo que sigue es una conversación con un asistente de AI experto en vinos. El asistente es servicial, creativo, inteligente y muy amable.\n\nHumano: Hola, ¿quién eres?\nAI: Soy un bot de AI experto en enología. ¿En qué puedo ayudarle hoy? \nHumano: ¿Qué debo buscar  en un vino tinto?\nAI: Al buscar un vino tinto, querrá asegurarse de encontrar una buena variedad que se adapte a sus gustos. También es importante considerar el precio y el tipo de vino que está buscando.\nHumano: ¿Qué es el proseco?\nAI: El proseco es un tipo de vino espumoso que se produce en Italia. Tiene un sabor dulce y afrutado, y suele ser más ligero que otros tipos de vino espumoso.\n", max_length=150)
+    
 def mises(question, chat_log=None):
     prompt_text = f'{chat_log}{restart_sequence}: {question}{start_sequence}:'
-    response = Client.generation.create(
+    response = client.generation.create(
         engine="finetuned-gpt-neox-20b",
         prompt=prompt_text,
         temperature=0.7,
