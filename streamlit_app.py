@@ -1,12 +1,13 @@
 from email.policy import default
 from multiprocessing.connection import answer_challenge
 import os
-import nlpcloud
+import openai
 import streamlit as st
 from streamlit_chat import message
 from Bot import mises, session_prompt
+from Sentiment import sentiment
 
-nlpcloud.api_key = os.getenv('TOKEN')
+openai.api_key = os.getenv('OPENAI_API_KEY')
 
 
 start_sequence = "\nAI:"
@@ -20,7 +21,7 @@ st.set_page_config(
     menu_items={
         'About': "This is a chatbot created using OPENAI's Advance GPT-3 model",
         'Get Help': 'mailto:mpolanco@feylibertad.org',
-        'Report a bug': "mailto:mpolanco@feylibertad.org",
+        'Report a bug': "mailto:mpolanco@feylibertadd.org",
     }
 )
 st.title("Chat Bot de Enología")
@@ -29,7 +30,7 @@ st.sidebar.title("🏢 Chat Bot de Enología")
 st.sidebar.markdown("""
 
 **Feedback/Questions**:
-[DIVIAPPS.COM](https://diviapps.com)
+[ARIN](https://arin.website)
 """)
 
 if 'generated' not in st.session_state:
@@ -43,6 +44,7 @@ if 'chat_log' not in st.session_state:
 
 chat_log = st.session_state['chat_log']
 
+
 def append_interaction_to_chat_log(question, answer, chat_log=None):
     if chat_log is None:
         chat_log = session_prompt
@@ -50,10 +52,8 @@ def append_interaction_to_chat_log(question, answer, chat_log=None):
 
 
 question = st.text_input("Pregunta sobre vinos:",
-                         value='¿Qué es una variedad?')
-message(question, is_user=False,
-       avatar_style="personas",
-       seed="456")
+                         value='P')
+message(question, is_user=True)
 
 answer = mises(question, chat_log)
 
